@@ -19,3 +19,7 @@ pytest = "^7.4.3"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+api = "realfans_api.main:main"
+serve = "realfans_api.main:main"
