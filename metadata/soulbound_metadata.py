@@ -52,3 +52,47 @@ soulbound_people_1 = {
         }
     ]
 }
+
+soulbound_people_2 = {
+    "name": "Five of a Kind",
+    "description": "Donate to 5 different people",
+    "image": "",
+    "attributes": [
+        {
+            "quote": "Meet the 'High Fivers'! You've just dealt generosity like a winning hand in a game of philanthropic poker."
+        }
+    ]
+}
+
+soulboud_people_3 = {
+    "name": "The Decade of Giving",
+    "description": "Donate to 10 different people",
+    "image": "",
+    "attributes": [
+        {
+            "quote":  "You've spread your generosity far and wide, proving you're a real pro at making people's days brighter."
+        }
+    ]
+}
+
+soulboud_fan_1 = {
+    "name": "Fan",
+    "description": "Donate 2 times to the same person",
+    "image": "",
+    "attributes": [
+        {
+            "quote":  "You're not just a donor; you're a superfan!"
+        }
+    ]
+}
+
+soulbound_fan_2 = {
+    "name": "The Loyal Supporter",
+    "description": "Donate 5 times to the same person",
+    "image": "",
+    "atributes": [
+        {
+            "quote": "Your unwavering commitment is a testament to the power of standing by someone through thick and thin"
+        }
+    ]
+}
