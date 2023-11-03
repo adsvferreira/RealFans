@@ -12,7 +12,7 @@ soulbound_template = {
 soulbound_donate_1 = {
     "name": "The Gift of Gifting",
     "description": "Donate one NFT.",
-    "image": "",
+    "image": "ipfs://bafybeifeiwwgh3ahhxp43k36necki5x2ww7cypzjmig47gcjgdlj5hsni4",
     "attributes": [
         {
             "quote": "Your donation game is strong... even if it's a one-hit wonder!"
@@ -23,7 +23,7 @@ soulbound_donate_1 = {
 soulbound_donate_2 = {
     "name": "The Patron",
     "description": "Donate five NFTs.",
-    "image": "",
+    "image": "ipfs://bafybeielosmbgutrgrauzg6xp4y7iz4ynhevf5475waacpjcpzbamrnkzm",
     "attributes": [
         {
             "quote": "Five donations? You're not just a donor; you're a patron of generosity! Your wallet must be feeling lighter, but your heart is shining brighter."
@@ -34,7 +34,7 @@ soulbound_donate_2 = {
 soulbound_donate_3 = {
     "name": "Philanthropist",
     "description": "Donate 10 NFTs.",
-    "image": "",
+    "image": "ipfs://bafybeibqheldwokwodbw6ltyhnqjydjixc67koyf54hjprnvnplkha2hpu",
     "attributes": [
         {
             "quote": "Your donations have lit up the path for countless dreams to come true, turning despair into hope and want into abundance. You are a shining beacon of benevolence, a symbol of humanity's boundless potential for good."
@@ -143,11 +143,11 @@ soulbound_eth_3 = {
 
 soulbound_all_nfts = {
     "name": "The Collector's Triumph: Master of All Treasures",
-    "description": "Donate all NFT tiers",
-    "image": "",
+    "description": "Donate all NFT tiers.",
+    "image": "ipfs://bafybeihyq6sgt3ewpkl2d4aqfuevuhd5cnccezhy3impyfsddwzwmaxguq",
     "attributes": [
         {
-            "quote": "you've ascended to the pinnacle of mastery, where every piece finds its place, and every treasure becomes a testament to your relentless pursuit of the extraordinary."
+            "quote": "You've ascended to the pinnacle of mastery, where every piece finds its place, and every treasure becomes a testament to your relentless pursuit of the extraordinary."
         }
     ]
 }
