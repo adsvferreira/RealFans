@@ -12,6 +12,7 @@ app.include_router(hello_world_router)
 
 PORT = 8000
 
+
 def main() -> NoReturn:
     print(
         f"""
@@ -21,6 +22,7 @@ Visit {bcolors.YELLOW}http://localhost:{PORT}/docs{bcolors.END_COLOR} for docume
     )
     uvicorn.run(app, host="0.0.0.0", port=PORT, reload=False, workers=1)
     cleanup_server()
+
 
 if __name__ == "__main__":
     main()

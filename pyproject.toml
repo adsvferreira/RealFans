@@ -7,14 +7,11 @@ readme = "README.md"
 packages = [{include = "realfans_api"}]
 
 [tool.poetry.dependencies]
-python = "^3.9.0"
-fastapi = "^0.104.1"
-uvicorn = "^0.23.2"
-psutil = "^5.9.6"
-
-[tool.poetry.group.dev.dependencies]
-black = "^23.10.1"
-pytest = "^7.4.3"
+python = ">=3.9.0,<3.11"
+fastapi = ">=0.90.0"
+uvicorn = ">=0.23.2"
+psutil = ">=5.9.0"
+eth-brownie = ">=1.19.3"
 
 [build-system]
 requires = ["poetry-core"]
