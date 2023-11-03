@@ -4,9 +4,6 @@ pragma solidity 0.8.21;
 import {IUsers} from "../interfaces/IUsers.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
-error AlreadyAssociatedAddress(address address_);
-error AlreadyAddociatedTwitterHandle(string twitterHandle_);
-
 contract Users is Ownable, IUsers {
     mapping(string twitterHandle_ => address address_) private _getAddress;
     mapping(address address_ => string twitterHandle_) private _getTwitter;
@@ -29,15 +26,15 @@ contract Users is Ownable, IUsers {
         address address_,
         string calldata twitterHandle_
     ) external onlyOwner returns (bool) {
-        if (
+        require(
             keccak256(abi.encodePacked(_getTwitter[address_])) !=
-            keccak256(abi.encodePacked(""))
-        ) {
-            revert AlreadyAssociatedAddress(address_);
-        }
-        if (_getAddress[twitterHandle_] != address(0)) {
-            revert AlreadyAddociatedTwitterHandle(twitterHandle_);
-        }
+                keccak256(abi.encodePacked("")),
+            "Already associated address"
+        );
+        require(
+            _getAddress[twitterHandle_] != address(0),
+            "Already associated Twitter Handle"
+        );
         _getAddress[twitterHandle_] = address_;
         _getTwitter[address_] = twitterHandle_;
         return true;
