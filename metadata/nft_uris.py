@@ -1,0 +1,5 @@
+BRONZE_URI = "ipfs://bafybeidek2qafh7gnsoz4kmgwvxqfnc66fqop6hpabx7pi53jclypvaqqi"
+SILVER_URI = "ipfs://bafybeiaphcwbuyfcv6klqpngptudbhnq2mpsqw4yr7ldyz6lupg6ph4a7q"
+GOLD_URI = "ipfs://bafybeiabimrv4emeucgguwngii6vl6a3sil7si4tbuudkx2tbgn7jlakrm"
+PLATINUM_URI = "ipfs://bafybeiafzxnrknxeplqsl7nt2zpzc3ehrk4qn6wgxs44vkhgf33n643tea"
+DIAMOND_URI = "ipfs://bafybeiakj4dnmh2u45vvfqywc3ocodxfemcxrucjb5ec4ddnmgasossgtu"
