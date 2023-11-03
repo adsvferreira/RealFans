@@ -1,0 +1,5 @@
+BRONZE_URI = "ipfs://bafybeif4543rdmnsps2cozg43iyxwqdnomxsoxuit6q5k7gy77e2gjohii/Bronze.json"
+SILVER_URI = "ipfs://bafybeif4543rdmnsps2cozg43iyxwqdnomxsoxuit6q5k7gy77e2gjohii/Silver.json"
+GOLD_URI = "ipfs://bafybeif4543rdmnsps2cozg43iyxwqdnomxsoxuit6q5k7gy77e2gjohii/Gold.json"
+PLATINUM_URI = "ipfs://bafybeif4543rdmnsps2cozg43iyxwqdnomxsoxuit6q5k7gy77e2gjohii/Platinum.json"
+DIAMOND_URI = "ipfs://bafybeif4543rdmnsps2cozg43iyxwqdnomxsoxuit6q5k7gy77e2gjohii/Diamond.json"
