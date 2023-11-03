@@ -59,11 +59,10 @@ class APIInterfaceAsync(ABC):
         self.proxy = proxy
         self.session = None
         self.connector = None
-        self.current_requests = 0
-        self.max_proxy_requests = 0
-        self.change_country = False
+        self.max_proxy_requests = 1
+        self.change_country = True
         self.raise_for_status = raise_for_status
-        self.headers = self.__generate_fake_agent()
+        self.change_agent()
 
     @abstractmethod
     async def callback(self, response: ClientResponse):
@@ -137,9 +136,7 @@ class APIInterfaceAsync(ABC):
     )
     async def __request(self, *args, **kwargs):
         if kwargs.get("proxy"):
-            print(f"Using proxy {kwargs.get('proxy')}")
             return await self.__proxy_request(*args, **kwargs)
-        print("NOT USING PROXY")
         return await self.__session_request(*args, **kwargs)
 
     async def __session_request(

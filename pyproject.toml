@@ -15,6 +15,7 @@ eth-brownie = ">=1.19.3"
 backoff = "^2.2.1"
 user-agent = "^0.1.10"
 python-dotenv = "0.16.0"
+brotli = "^1.1.0"
 
 [build-system]
 requires = ["poetry-core"]
