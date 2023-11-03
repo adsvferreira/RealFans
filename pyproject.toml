@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "realfans-api"
+version = "0.1.0"
+description = ""
+authors = ["dynalz <tonyramos237@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "realfans_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.9.0"
+fastapi = "^0.104.1"
+uvicorn = "^0.23.2"
+psutil = "^5.9.6"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.10.1"
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
