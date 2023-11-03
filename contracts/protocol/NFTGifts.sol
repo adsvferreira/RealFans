@@ -3,34 +3,76 @@ pragma solidity 0.8.21;
 
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {INFTGifts} from "../interfaces/INFTGifts.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {CommunityVault, IERC20} from "./CommunityVault.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract NFTGifts is ERC721, ERC721URIStorage, Ownable, INFTGifts {
     using Strings for string;
+    using SafeERC20 for IERC20;
 
+    // TODO:
+    // min/redeem by handle
+
+    CommunityVault communityVault;
     string[] private _giftURIs;
     uint256 private _tokenIdCounter;
+    address[] private _donators;
+    address[] private _receivers;
 
+    mapping(uint256 => bool) private _isRedeemed;
     mapping(string => uint256) private _totalGiftQty;
     mapping(string => uint256) private _ethValuePerGiftURI;
     mapping(address => mapping(string => uint256)) private _GiftQtyPerAddress;
+    mapping(address => mapping(string => uint256))
+        private _DonatedQtyPerAddress;
 
-    constructor() ERC721("NFTGifts", "NFTG") Ownable(msg.sender) {}
+    event Donation(
+        address indexed donator,
+        address indexed receiver,
+        string giftURI,
+        uint256 ethValue
+    );
+
+    event Redemption(
+        address indexed receiver,
+        string giftURI,
+        uint256 ethValue
+    );
+
+    constructor(
+        address _vaultAddress
+    ) ERC721("NFTGifts", "NFTG") Ownable(msg.sender) {
+        communityVault = CommunityVault(_vaultAddress);
+    }
 
     function mintGift(
         address to,
         string calldata giftURI
     ) external payable onlyOwner {
         require(_isGiftURIWhitelisted(giftURI), "tokenURI noy whitelisted yet");
-        uint256 tokenIdCounter = _tokenIdCounter + 1;
-        _safeMint(to, tokenIdCounter);
-        _setTokenURI(tokenIdCounter, giftURI);
-        // TODO: send eth to community pool
-        _tokenIdCounter = tokenIdCounter;
+        uint256 newTokenIdCounter = _tokenIdCounter + 1;
+        uint256 ethValue = _ethValuePerGiftURI[giftURI];
+        address depositAsset = communityVault.asset();
+        _receivers.push(to);
+        _donators.push(msg.sender);
+        _isRedeemed[newTokenIdCounter] = false;
+        _tokenIdCounter = newTokenIdCounter;
         ++_totalGiftQty[giftURI];
         ++_GiftQtyPerAddress[to][giftURI];
+        _safeMint(to, newTokenIdCounter);
+        _setTokenURI(newTokenIdCounter, giftURI);
+        SafeERC20.safeTransferFrom(
+            IERC20(depositAsset),
+            msg.sender,
+            address(this),
+            ethValue
+        );
+        IERC20(depositAsset).approve(address(communityVault), ethValue);
+        communityVault.deposit(ethValue, address(this));
+        emit Donation(msg.sender, to, giftURI, ethValue);
     }
 
     function addNewGiftURI(
@@ -43,6 +85,19 @@ contract NFTGifts is ERC721, ERC721URIStorage, Ownable, INFTGifts {
         );
         _giftURIs.push(giftURI);
         _ethValuePerGiftURI[giftURI] = ethValue;
+    }
+
+    function redeemDonation(uint256 tokenId) external {
+        require(msg.sender == ownerOf(tokenId));
+        string memory giftTokenURI = tokenURI(tokenId);
+        uint256 ethValue = _ethValuePerGiftURI[giftTokenURI];
+        _isRedeemed[tokenId] = true;
+        communityVault.withdraw(ethValue, msg.sender, address(this));
+        emit Redemption(msg.sender, giftTokenURI, ethValue);
+    }
+
+    function isRedeemed(uint256 tokenId) external view returns (bool) {
+        return _isRedeemed[tokenId];
     }
 
     function _isGiftURIWhitelisted(
@@ -125,6 +180,14 @@ contract NFTGifts is ERC721, ERC721URIStorage, Ownable, INFTGifts {
                 ++i;
             }
         }
+    }
+
+    function getAllDonators() external view returns (address[] memory) {
+        return _donators;
+    }
+
+    function getAllReceivers() external view returns (address[] memory) {
+        return _receivers;
     }
 
     // The following functions are overrides required by Solidity:
