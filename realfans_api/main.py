@@ -6,6 +6,7 @@ from realfans_api.utils.colors import bcolors
 from realfans_api.utils.cleanup_server import cleanup_server
 from realfans_api.routes.helloworld import router as hello_world_router
 
+
 app = FastAPI()
 app.include_router(hello_world_router)
 
