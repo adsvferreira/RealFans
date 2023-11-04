@@ -17,8 +17,13 @@ networks:
     verify: False
   arbitrum-main-fork:
     verify: False
+    users_address: "0x4D76E5Cc49091563BB3203657E11c485daAB4681"
+    nft_gifts_address: "0xCF85C0DB8b670c3AADa28B47b735B085BFCF2c9d"
+    soulbound_address: "0x8b0242F40b0428715475254d37853Ea13b83b610"
     deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
+    community_vault_address: "0x48f27B0094d907417F781294bCd9fc48C4F556fB"
   arbitrum-main:
+    host: "wss://arb-mainnet.g.alchemy.com/v2/4xtrY8Y7E-DEeAFPwluzeq2HHw7Zdazm"
     verify: True
     users_address: "0x4D76E5Cc49091563BB3203657E11c485daAB4681"
     nft_gifts_address: "0xCF85C0DB8b670c3AADa28B47b735B085BFCF2c9d"

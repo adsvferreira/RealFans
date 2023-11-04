@@ -1,4 +1,5 @@
 from pyparsing import Any
+from typing import Callable
 from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
 
 
@@ -11,7 +12,7 @@ class MyDatabase:
     quests_profile: dict[str, list[BadgeMinted]] = {}  # address, BadgeMinted
 
     @classmethod
-    def add_multiple_entries(cls, function: callable, entries: list[Any]):
+    def add_multiple_entries(cls, function: Callable, entries: list[Any]):
         for entry in entries:
             function(entry)
 
