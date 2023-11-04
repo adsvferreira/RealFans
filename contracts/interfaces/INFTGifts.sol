@@ -18,4 +18,6 @@ interface INFTGifts {
         external
         view
         returns (uint256 totalEthBalance);
+
+    function isRedeemed(uint256 tokenId) external view returns (bool);
 }
