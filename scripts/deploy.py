@@ -1,3 +1,5 @@
+from .add_nft_uris import add_nft_uris
+from .add_soulbound_uris import add_soulbound_uris
 from brownie import CommunityVault, NFTGifts, SoulboundBadges, Users, accounts, config, network
 
 dev_wallet = accounts.add(config["wallets"]["from_key_1"])
@@ -41,4 +43,14 @@ def main():
     print(CONSOLE_SEPARATOR)
     print("NFT GIFTS DEPLOYMENT:")
     nft_gifts = NFTGifts.deploy(vault.address, users.address, {"from": dev_wallet}, publish_source=verify_flag)
+    print()
+
+    print(CONSOLE_SEPARATOR)
+    print("SOULBOUND URIS SETUP:")
+    add_soulbound_uris(dev_wallet, soulbound_badges.address)
+    print()
+
+    print(CONSOLE_SEPARATOR)
+    print("NFT URIS SETUP:")
+    add_nft_uris(dev_wallet, nft_gifts.address)
     print()
