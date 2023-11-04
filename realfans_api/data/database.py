@@ -1,3 +1,4 @@
+from typing import Optional
 from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
 
 
@@ -8,6 +9,36 @@ class MyDatabase:
     donations_sent: dict[str, list[Donation]] = {}  # address, Donation
     donations_received: dict[str, list[Donation]] = {}  # twitter handler, Donation
     quests_profile: dict[str, list[BadgeMinted]] = {}  # address, BadgeMinted
+
+    @classmethod
+    def get_twitter_address(cls, twitter_handle: str) -> Optional[str]:
+        return cls.twitter_to_address.get(twitter_handle)
+
+    @classmethod
+    def get_user_received_donations(cls, twitter_handle: str) -> list[Donation]:
+        return cls.donations_received.get(twitter_handle, [])
+
+    @classmethod
+    def get_user_sent_gifts(cls, address: str) -> list[Donation]:
+        return cls.donations_sent.get(address, [])
+
+    @classmethod
+    def get_user_sent_gifts_by_twitter(cls, twitter_handle: str) -> list[Donation]:
+        address = cls.twitter_to_address.get(twitter_handle)
+        if not address:
+            return []
+        return cls.get_user_sent_gifts(address)
+
+    @classmethod
+    def get_user_quests_done(cls, address: str) -> list[BadgeMinted]:
+        return cls.quests_profile.get(address, [])
+
+    @classmethod
+    def get_user_quests_done_by_twitter(cls, twitter_handle: str) -> list[BadgeMinted]:
+        address = cls.twitter_to_address.get(twitter_handle)
+        if not address:
+            return []
+        return cls.get_user_quests_done(address)
 
     @classmethod
     def add_twitter_profile(cls, profile: TwitterProfile):
@@ -47,5 +78,41 @@ MyDatabase.add_twitter_profile(
         following=474,
         created_at="Jun 2nd, 2009",
         avatar="https://pbs.twimg.com/profile_images/1683325380441128960/yRsRRjGO.jpg",
+    )
+)
+
+MyDatabase.add_donation(
+    Donation(
+        sender="0x",
+        receiver_twitter_handle="elonmusk",
+        gift_uri="ipfs://bafybeiem3hww2qkwzei3r62jx2xu25nax6zaaunaqag6uyaiuyd2hwgxba/Bronze.json",
+        eth_value=1,
+        redeemed=False,
+    )
+)
+
+MyDatabase.add_donation(
+    Donation(
+        sender="0x",
+        receiver_twitter_handle="elonmusk",
+        gift_uri="ipfs://bafybeiem3hww2qkwzei3r62jx2xu25nax6zaaunaqag6uyaiuyd2hwgxba/Silver.json",
+        eth_value=10,
+        redeemed=False,
+    )
+)
+
+MyDatabase.add_user_added(
+    UserAdded(
+        address="0x1",
+        twitter_handle="elonmusk",
+    )
+)
+
+MyDatabase.add_redemption(
+    Redemption(
+        sender="0x1",
+        receiver_twitter_handle="elonmusk",
+        gift_token_uri="ipfs://bafybeiem3hww2qkwzei3r62jx2xu25nax6zaaunaqag6uyaiuyd2hwgxba/Bronze.json",
+        eth_value=1,
     )
 )
