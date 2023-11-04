@@ -4,12 +4,14 @@ from typing import NoReturn
 from fastapi import FastAPI
 
 from realfans_api.utils.colors import bcolors
-from realfans_api.routes.user import router as user_router
+from realfans_api.routes.users import router as user_router
+from realfans_api.routes.stats import router as stats_router
 from realfans_api.utils.cleanup_server import cleanup_server
 
 
 app = FastAPI()
 app.include_router(user_router)
+app.include_router(stats_router)
 
 PORT = 8000
 

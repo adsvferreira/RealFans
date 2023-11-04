@@ -1,6 +1,5 @@
-import pytest
-from brownie import accounts, config, network
 from docs.abis import erc20_abi
+from brownie import accounts, config, network
 
 dev_wallet = accounts.add(config["wallets"]["from_key_1"])
 dev_wallet2 = accounts.add(config["wallets"]["from_key_2"])
@@ -17,10 +16,10 @@ weth = Contract.from_abi("ERC20", config["networks"][network.show_active()]["dep
 
 ################## SOULBOUND TESTS ##################
 
-# tx1 = SoulboundBadges.deploy({"from": dev_wallet})
-# soulboundBadges = SoulboundBadges[-1]
-# tx2 = soulboundBadges.addNewBadgeURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
-# tx3 = soulboundBadges.mintBadge(dev_wallet, URI_EXAMPLE, {"from": dev_wallet})
+tx1 = SoulboundBadges.deploy({"from": dev_wallet})
+soulboundBadges = SoulboundBadges[-1]
+tx2 = soulboundBadges.addNewBadgeURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
+tx3 = soulboundBadges.mintBadge(dev_wallet, URI_EXAMPLE, {"from": dev_wallet})
 
 soulboundBadges.getAllURIs()
 soulboundBadges.getTokenIdCounter()
@@ -56,15 +55,15 @@ users.writeTwitterHandle(dev_address_2, twitter_handle_2, {"from": dev_wallet_2}
 ################## COMMUNITY VAULT TESTS ##################
 
 vault = CommunityVault.deploy(asset, vault_name, vault_symbol, {"from": dev_wallet})
-# tx5 = weth.approve(vault.address, APPROVE_VALUE, {"from": dev_wallet})
-# tx6 = vault.deposit(100_000, dev_wallet, {"from": dev_wallet})
-# vault.balanceOf(dev_wallet)
-# vault.withdraw(NFT_ETH_VALUE, dev_wallet, dev_wallet, {"from":dev_wallet})
+tx5 = weth.approve(vault.address, APPROVE_VALUE, {"from": dev_wallet})
+tx6 = vault.deposit(100_000, dev_wallet, {"from": dev_wallet})
+vault.balanceOf(dev_wallet)
+vault.withdraw(NFT_ETH_VALUE, dev_wallet, dev_wallet, {"from": dev_wallet})
 
 
 ################## NFT TESTS ##################
 
-nftGifts = NFTGifts.deploy(vault.address, {"from": dev_wallet})
+nftGifts = NFTGifts.deploy(vault.address, users.address, {"from": dev_wallet})
 tx8 = nftGifts.addNewGiftURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
 tx9 = weth.approve(nftGifts.address, APPROVE_VALUE, {"from": dev_wallet})
 CREATOR_ADDR = dev_wallet.address
@@ -90,7 +89,7 @@ nftGifts.getAllDonators()
 nftGifts.getAllReceivers()
 
 # mint to unregistred account
-tx12 = nftGifts.mintGift("elonmusk", URI_EXAMPLE, {"from": dev_wallet})
+tx12 = nftGifts.mintGift("elonmusk", URI_EXAMPLE, {"from": dev_wallet2})
 nftGifts.getGiftQtyOfUnclaimedAccount("elonmusk", URI_EXAMPLE)
 nftGifts.getAllDonators()
 nftGifts.getAllReceivers()

@@ -11,7 +11,7 @@ class LeaderboardType(str, Enum):
 
 @dataclass
 class TwitterProfile:
-    username: str
+    username: Optional[str] = None
     name: Optional[str] = None
     avatar: Optional[str] = None
     tweets: Optional[int] = None
