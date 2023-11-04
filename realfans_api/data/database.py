@@ -11,8 +11,16 @@ class MyDatabase:
     quests_profile: dict[str, list[BadgeMinted]] = {}  # address, BadgeMinted
 
     @classmethod
+    def get_twitter_profile(cls, twitter_handle: str) -> Optional[TwitterProfile]:
+        return cls.twitter_profiles.get(twitter_handle)
+
+    @classmethod
     def get_twitter_address(cls, twitter_handle: str) -> Optional[str]:
         return cls.twitter_to_address.get(twitter_handle)
+
+    @classmethod
+    def get_address_twitter(cls, address: str) -> Optional[str]:
+        return cls.address_to_twitter.get(address)
 
     @classmethod
     def get_user_received_donations(cls, twitter_handle: str) -> list[Donation]:
