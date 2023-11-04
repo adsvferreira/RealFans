@@ -1,6 +1,7 @@
 from typing import Any
 
 from metadata.soulbound_metadata import all_badges
+from metadata.soulbound_uris import SOULBOUND_URIS
 from realfans_api.data.models import Donation, BadgeMinted
 
 
@@ -23,7 +24,8 @@ class BadgeMinter:
         stats["donation_repeat_count"] = max(donations_to_unique_users.values())
 
         for badge in all_badges.values():
-            if badge["image"] in already_aquired_badges:
+            badge_id = SOULBOUND_URIS[badge["id"]]
+            if badge_id in already_aquired_badges:
                 continue
 
             mint_badge = True
@@ -51,7 +53,9 @@ class BadgeMinter:
             from brownie import SoulboundBadges
 
             soulbound_contract = SoulboundBadges.at("0xB4C0CFb2A7762B6a867E0f630Bf73f359AED4D58")
-            soulbound_contract.mintBadge(address, badge["image"], {"from": contract_owner_wallet})
+
+            badge_id = SOULBOUND_URIS[badge["id"]]
+            soulbound_contract.mintBadge(address, badge_id, {"from": contract_owner_wallet})
         except Exception as exc:
             import traceback
 
