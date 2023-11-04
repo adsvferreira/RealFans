@@ -4,7 +4,7 @@ from threading import Thread
 
 from metadata.soulbound_metadata import all_badges
 from metadata.soulbound_uris import SOULBOUND_URIS
-from realfans_api.data.models import Donation, BadgeMinted
+from realfans_api.data.models import Donation
 
 
 class BadgeMinter:
@@ -14,7 +14,7 @@ class BadgeMinter:
         thread.start()
 
     @classmethod
-    def mint_badge(cls, address: str, donations: list[Donation], badges: list[BadgeMinted]):
+    def mint_badge(cls, address: str, donations: list[Donation]):
         if address == "0x":
             return
         sleep(10)
