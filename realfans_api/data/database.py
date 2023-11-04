@@ -104,9 +104,7 @@ class MyDatabase:
         cls.donations_sent.setdefault(donation.sender, []).append(donation)
         cls.donations_received.setdefault(donation.receiver_twitter_handle, []).append(donation)
         cls.compute_leaderboard()
-        BadgeMinter.mint_badge(
-            donation.sender, cls.donations_sent[donation.sender], cls.quests_profile.get(donation.sender, [])
-        )
+        BadgeMinter.queue_mint_badge(donation.sender, cls.donations_sent[donation.sender])
 
     @classmethod
     def add_redemption(cls, redemption: Redemption):
