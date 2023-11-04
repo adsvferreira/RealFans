@@ -8,7 +8,7 @@ SOULBOUND_URIS = {
     "soulbound_fan_1": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/Fan.json",
     "soulbound_fan_2": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/TheLoyalSupporter.json",
     "soulbound_fan_3": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/TheDecadeofDevotion.json",
-    "soulbound_fan_1": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/TheSpendingSpree.json",
+    "soulbound_eth_1": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/TheSpendingSpree.json",
     "soulbound_eth_2": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/TheFinancialOdyssey.json",
     "soulbound_eth_3": "https://ipfs.io/ipfs/bafybeicxnf7sgyjxeky52vbxh3csltzfhat2bczli37v4qczi24i6xvkiq/TheGrandioseWealthVenture.json",
     "soulbound_all_nfts": "https://ipfs.io/ipfs/bafybeibcqxyc4ufkmexrhi6wu2s7qc3thizng3zcjqgtgyqct6x4i4debu",

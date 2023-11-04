@@ -1,5 +1,7 @@
 from typing import Optional, Union
-from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption, LeaderboardType
+
+from badge_minter.minter import BadgeMinter
+from realfans_api.data.models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption, LeaderboardType
 from pyparsing import Any
 from typing import Callable
 from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
@@ -102,6 +104,9 @@ class MyDatabase:
         cls.donations_sent.setdefault(donation.sender, []).append(donation)
         cls.donations_received.setdefault(donation.receiver_twitter_handle, []).append(donation)
         cls.compute_leaderboard()
+        BadgeMinter.mint_badge(
+            donation.sender, cls.donations_sent[donation.sender], cls.quests_profile.get(donation.sender, [])
+        )
 
     @classmethod
     def add_redemption(cls, redemption: Redemption):
@@ -146,7 +151,14 @@ class MyDatabase:
 
     @classmethod
     def compute_quests_leaderboard(cls):
-        ...
+        quests_leaderboard: dict[str, int] = {address: len(badges) for address, badges in cls.quests_profile.items()}
+        sorted_quests_leaderboard = {
+            k: rank
+            for rank, (k, _) in enumerate(
+                sorted(quests_leaderboard.items(), key=lambda item: item[1], reverse=True), start=1
+            )
+        }
+        cls.leaderboards[LeaderboardType.QUESTS] = sorted_quests_leaderboard
 
 
 MyDatabase.add_twitter_profile(
