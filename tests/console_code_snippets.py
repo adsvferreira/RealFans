@@ -1,3 +1,4 @@
+import pytest
 from brownie import accounts, config, network
 from docs.abis import erc20_abi
 
@@ -58,3 +59,27 @@ tx13 = nftGifts.redeemDonation(1, {"from": dev_wallet})
 weth.balanceOf(dev_wallet)
 nftGifts.balanceOf(dev_wallet)
 nftGifts.isRedeemed(1)
+
+
+################## USERS TESTS ##################
+
+users_tx_1 = Users.deploy({"from": dev_wallet})
+users = Users[-1]
+twitter_handle = "1DeadPixel"
+
+# Associate a twitter handle to an address
+users_tx_2 = users.writeTwitterHandle(dev_address, twitter_handle, {"from": dev_wallet})
+
+# Assert that the mapping from address to twitter handle is correct and vice versa
+assert users.getAddressFromTwitterHandle(twitter_handle) == dev_address
+assert users.getTwitterHandleFromAddress(dev_address) == twitter_handle
+
+# Try associating another wallet to the same twitter handle and another twitter handle to the same address.
+# Note: It's expected that both these transactions fail.
+twitter_handle_2 = "random"
+users.writeTwitterHandle(dev_address_2, twitter_handle, {"from": dev_wallet})
+users.writeTwitterHandle(dev_address, twitter_handle_2, {"from": dev_wallet})
+
+# Try writeTwitterHandle with a wallet that's not owner
+# Note: The association doesn't exist but the wallet sending the transaction is not owner
+users.writeTwitterHandle(dev_address_2, twitter_handle_2, {"from": dev_wallet_2})

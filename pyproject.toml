@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "realfans-api"
+version = "0.1.0"
+description = ""
+authors = ["dynalz <tonyramos237@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "realfans_api"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9.0,<3.11"
+fastapi = ">=0.90.0"
+uvicorn = ">=0.23.2"
+psutil = ">=5.9.0"
+eth-brownie = ">=1.19.3"
+backoff = "^2.2.1"
+user-agent = "^0.1.10"
+python-dotenv = "0.16.0"
+brotli = "^1.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+api = "realfans_api.main:main"
+serve = "realfans_api.main:main"
