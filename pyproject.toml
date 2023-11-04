@@ -4,7 +4,8 @@ version = "0.1.0"
 description = ""
 authors = ["dynalz <tonyramos237@hotmail.com>"]
 readme = "README.md"
-packages = [{include = "realfans_api"}]
+packages = [{ include = "realfans_api" }, { include = "badge_minter" }]
+
 
 [tool.poetry.dependencies]
 python = ">=3.9.0,<3.11"
