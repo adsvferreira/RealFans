@@ -44,9 +44,11 @@ async def get_user_info__by_username(username: str) -> UserProfile:
 
 async def get_user_info__by_address(address: str) -> UserProfile:
     username = MyDatabase.get_address_twitter(address)
+    profile = None
     if username:
-        profile: TwitterProfile = MyDatabase.get_twitter_profile(username)
-    else:
+        profile = MyDatabase.get_twitter_profile(username)
+
+    if not profile:
         profile = TwitterProfile()
 
     gifts_received = []
