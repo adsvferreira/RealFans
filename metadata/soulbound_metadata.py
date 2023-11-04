@@ -64,7 +64,7 @@ soulbound_people_2 = {
     ]
 }
 
-soulboud_people_3 = {
+soulbound_people_3 = {
     "name": "The Decade of Giving",
     "description": "Donate to 10 different people.",
     "image": "ipfs://bafybeiepidjpgbu3d4rpjx2isxy7njcjz44igppz4lm7pzmvlsbpkujdnu",
@@ -75,10 +75,10 @@ soulboud_people_3 = {
     ]
 }
 
-soulboud_fan_1 = {
+soulbound_fan_1 = {
     "name": "Fan",
-    "description": "Donate 2 times to the same person",
-    "image": "",
+    "description": "Donate 2 times to the same person.",
+    "image": "ipfs://bafybeignhyxg7haqm7q3hg3txxjw7cg5mixgzfbhnd37wia7a25xbs5y6i",
     "attributes": [
         {
             "quote":  "You're not just a donor; you're a superfan!"
@@ -88,11 +88,11 @@ soulboud_fan_1 = {
 
 soulbound_fan_2 = {
     "name": "The Loyal Supporter",
-    "description": "Donate 5 times to the same person",
-    "image": "",
+    "description": "Donate 5 times to the same person.",
+    "image": "ipfs://bafybeic4rnykea5orgy7iyx37vjjun7iv7pkot2a5aqzor4zb5zbshiddi",
     "atributes": [
         {
-            "quote": "Your unstoppable commitment is a testament to the power of standing by someone through thick and thin"
+            "quote": "Your unstoppable commitment is a testament to the power of standing by someone through thick and thin."
         }
     ]
 }
@@ -100,7 +100,7 @@ soulbound_fan_2 = {
 soulbound_fan_3 = {
     "name": "The Decade of Devotion",
     "description": "Donate 10 times to the same person.",
-    "image": "",
+    "image": "ipfs://bafybeidlqqse7bbiarhsbohazynwuvgh6apwxiywkfarln63llf7ltkp4m",
     "attributes": [
         {
             "quote": "Ten acts of unwavering devotion, a legacy of love that time can never fade."
@@ -111,7 +111,7 @@ soulbound_fan_3 = {
 soulbound_eth_1 = {
     "name": "The Spending Spree",
     "description": "Donate a total of 0.00001 ETH",
-    "image": "",
+    "image": "ipfs://bafybeia3kecm5zdvzovusj3a4ppxiaftnxejhyvmpaqlobk6xjxtj4zsea",
     "attributes": [
         {
             "quote": "Life's a spending spree, make each purchase count."
@@ -122,7 +122,7 @@ soulbound_eth_1 = {
 soulbound_eth_2 = {
     "name": "The Financial Odyssey",
     "description": "Donate a total of 0.0001 ETH",
-    "image": "",
+    "image": "ipfs://bafybeibkkx7kz4zpk7wlxmcu5xcqh77mzmbeojxc5363udzbxtynocqtgy",
     "attributes": [
         {
             "quote": "The carefree cash quest: Spend like there's no tomorrow"
@@ -133,7 +133,7 @@ soulbound_eth_2 = {
 soulbound_eth_3 = {
     "name": "The Grandiose Wealth Venture",
     "description": "Donate a total of 0.001 ETH",
-    "image": "",
+    "image": "ipfs://bafybeidojdiiqobmlqhclgkic2woubp63ygqkwdzcvslsqrjpq6gcueije",
     "attributes": [
         {
             "quote": "You're not just spending. You're scripting an epic saga of opulence, where each transaction becomes a verse in your story of abundance."

@@ -20,4 +20,6 @@ networks:
     deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
   arbitrum-main:
     verify: True
+    nft_gifts_address: ""
+    soulbound_address: ""
     deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
