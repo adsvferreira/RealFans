@@ -4,14 +4,12 @@ from brownie import (
     network,
 )
 
-import yaml
+from realfans_api.enums import BROWNIE_PROJECT
 
 
 def build_contracts(net: str) -> dict:
 
-    my_project = project.load(".")
-    my_project.load_config()
-    network.connect(net)
+    my_project = BROWNIE_PROJECT
     NETWORK_PATH = config["networks"][net]
 
     return {"users": my_project.Users.at(NETWORK_PATH["users_address"]),
