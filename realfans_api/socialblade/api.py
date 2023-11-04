@@ -31,6 +31,7 @@ class SocialBladeAPI(APIInterfaceAsync):
             raise ExternalAPIException(f"Invalid data.\n\nHtml: {html}")
 
         return TwitterProfile(
+            username=username.lower(),
             name=self.parse_name(html),
             avatar=self.parse_avatar(html),
             followers=self.parse_followers(html),

@@ -1,9 +1,8 @@
-from typing import Self
 from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
 
 
 class MyDatabase:
-    twitter_profiles: dict[str, TwitterProfile]  # username, TwitterProfile
+    twitter_profiles: dict[str, TwitterProfile] = {}  # username, TwitterProfile
     address_to_twitter: dict[str, str] = {}  # address, twitter handle
     twitter_to_address: dict[str, str] = {}  # reverse from above
     donations_sent: dict[str, list[Donation]] = {}  # address, Donation
@@ -37,3 +36,16 @@ class MyDatabase:
                 continue
             donation.redeemed = True
             break
+
+
+MyDatabase.add_twitter_profile(
+    TwitterProfile(
+        username="elonmusk",
+        name="Elon Musk",
+        tweets=32845,
+        followers=162094340,
+        following=474,
+        created_at="Jun 2nd, 2009",
+        avatar="https://pbs.twimg.com/profile_images/1683325380441128960/yRsRRjGO.jpg",
+    )
+)
