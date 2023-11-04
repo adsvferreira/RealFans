@@ -1,9 +1,17 @@
+from enum import Enum
 from typing import Optional
 from pydantic.dataclasses import dataclass
 
 
+class LeaderboardType(str, Enum):
+    QUESTS = "QUESTS"
+    DONATERS = "DONATERS"
+    CREATORS = "CREATORS"
+
+
 @dataclass
 class TwitterProfile:
+    username: str
     name: Optional[str] = None
     avatar: Optional[str] = None
     tweets: Optional[int] = None
@@ -11,38 +19,29 @@ class TwitterProfile:
     following: Optional[int] = None
     created_at: Optional[str] = None
 
-@dataclass
-class Transfer:
-    from_address: str
-    to_address: str
-    value: int
-
-@dataclass
-class Approval:
-    owner: str
-    spender: str
-    value: int
 
 @dataclass
 class Donation:
     sender: str
-    to_address: str
     receiver_twitter_handle: str
-    donator_twitter_handle: str
     gift_uri: str
-    eth_value: int
+    eth_value: float
+    redeemed: bool = False
+
 
 @dataclass
 class Redemption:
     sender: str
     receiver_twitter_handle: str
     gift_token_uri: str
-    eth_value: int
+    eth_value: float
+
 
 @dataclass
 class BadgeMinted:
     to_address: str
     badge_uri: str
+
 
 @dataclass
 class UserAdded:

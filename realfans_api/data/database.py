@@ -1,3 +1,4 @@
+from pyparsing import Any
 from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
 
 
@@ -8,6 +9,11 @@ class MyDatabase:
     donations_sent: dict[str, list[Donation]] = {}  # address, Donation
     donations_received: dict[str, list[Donation]] = {}  # twitter handler, Donation
     quests_profile: dict[str, list[BadgeMinted]] = {}  # address, BadgeMinted
+
+    @classmethod
+    def add_multiple_entries(cls, function: callable, entries: list[Any]):
+        for entry in entries:
+            function(entry)
 
     @classmethod
     def add_twitter_profile(cls, profile: TwitterProfile):

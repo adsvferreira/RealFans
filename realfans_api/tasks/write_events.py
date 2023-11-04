@@ -1,19 +1,18 @@
-# from data.models import Event
-from realfans_api.data.database import MyDatabase
-
-# from scripts.build_contracts import build_contracts
-
+from brownie import chain
+from realfans_api.data import database
+from realfans_api.scripts.build_contracts import build_contracts
 
 
 
-def execute():
-    block = None
-    while True:  # POG
+
+def execute(database: database.MyDatabase):
+    to_block = None
     from_block = None
-    to_block = "latest"
-    
-    while True: # POG
-        
-        contracts = build_contracts()
+    contracts = build_contracts()
+    while True:  # POG
+        to_block = chain.height
 
-        # Fetch User events
+        # Fetch user events
+        users = contracts["users"]
+        user_added_events = 
+        database.add_multiple_entries
