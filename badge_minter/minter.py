@@ -8,6 +8,8 @@ from realfans_api.data.models import Donation, BadgeMinted
 class BadgeMinter:
     @classmethod
     def mint_badge(cls, address: str, donations: list[Donation], badges: list[BadgeMinted]):
+        if address == "0x":
+            return
         already_aquired_badges = {badge.badge_uri for badge in badges}
 
         stats: dict[str, Any] = {}
