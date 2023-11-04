@@ -11,6 +11,7 @@ class LeaderboardType(str, Enum):
 
 @dataclass
 class TwitterProfile:
+    username: str
     name: Optional[str] = None
     avatar: Optional[str] = None
     tweets: Optional[int] = None
@@ -25,6 +26,7 @@ class Donation:
     receiver_twitter_handle: str
     gift_uri: str
     eth_value: float
+    redeemed: bool = False
 
 
 @dataclass
