@@ -8,11 +8,6 @@ API = SocialBladeAPI()
 cache: dict[str, TwitterProfile] = {}
 
 
-@router.get("/")
-async def test() -> dict:
-    return {"gg": 1}
-
-
 @router.get("/getUserInfo")
 async def get_user_info(username: str) -> TwitterProfile:
     username = username.lower()
@@ -21,3 +16,8 @@ async def get_user_info(username: str) -> TwitterProfile:
     profile = await API.get_user_data(username)
     cache[username] = profile
     return profile
+
+
+@router.get("/getLandingPageStats")
+async def get_landingpage_stats():
+    ...
