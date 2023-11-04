@@ -7,7 +7,14 @@ router = APIRouter()
 
 API = SocialBladeAPI()
 
+cache: dict[str, TwitterProfile] = {}
+
 
 @router.get("/getUserInfo")
 async def get_user_info(username: str) -> TwitterProfile:
-    return await API.get_user_data(username)
+    username = username.lower()
+    if username in cache:
+        return cache[username]
+    profile = await API.get_user_data(username)
+    cache[username] = profile
+    return profile
