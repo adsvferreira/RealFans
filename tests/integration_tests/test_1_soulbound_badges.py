@@ -82,3 +82,10 @@ def test_mint_badge_by_non_owner():
     # Act / Assert
     with pytest.raises(exceptions.VirtualMachineError):
         soulbound_contract.mintBadge(dev_wallet2, uri, {"from": dev_wallet2})
+
+
+def transfer_badge():
+    check_network_is_mainnet_fork()
+    # Arrange
+    soulbound_contract = SoulboundBadges[-1]
+    # TODO
