@@ -7,8 +7,8 @@ router = APIRouter()
 
 
 @router.get("/getLeaderBoards")
-async def get_leaderboards(leaderboard_type: LeaderboardType):
-    ...
+async def get_leaderboards(leaderboard_type: LeaderboardType) -> dict:
+    return MyDatabase.leaderboards[leaderboard_type]
 
 
 @router.get("/getLandingPageStats")
