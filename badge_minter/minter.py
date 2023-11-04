@@ -39,6 +39,7 @@ class BadgeMinter:
         for badge in all_badges.values():
             badge_id = SOULBOUND_URIS[badge["id"]]
             if badge_id in already_aquired_badges:
+                print(f"{badge_id} already adquired, skipping...")
                 continue
 
             mint_badge = True
