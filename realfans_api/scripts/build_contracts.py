@@ -4,7 +4,7 @@ from brownie import (
     network,
 )
 
-from realfans_api.enums import BROWNIE_PROJECT
+from realfans_api.load_brownie import BROWNIE_PROJECT
 
 
 def build_contracts(net: str) -> dict:
