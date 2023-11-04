@@ -8,6 +8,6 @@ SOULBOUND_CONTRACT = config["networks"][network.show_active()]["soulbound_addres
 soulbound_contract = SoulboundBadges.at(SOULBOUND_CONTRACT)
 
 for uri in SOULBOUND_URIS.values():
-    soulbound_contract.addNewGiftURI(uri)
+    soulbound_contract.addNewBadgeURI(uri)
 
 print("Added all Soulbound URIs.")
