@@ -8,7 +8,7 @@ contract Users is Ownable, IUsers {
     mapping(string twitterHandle_ => address address_) private _getAddress;
     mapping(address address_ => string twitterHandle_) private _getTwitter;
 
-    event userAdded(address indexed userAddress, string indexed userHandle);
+    event userAdded(address indexed userAddress, string userHandle);
 
     constructor() Ownable(msg.sender) {}
 
