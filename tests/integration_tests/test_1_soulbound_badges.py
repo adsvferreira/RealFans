@@ -88,4 +88,6 @@ def transfer_badge():
     check_network_is_mainnet_fork()
     # Arrange
     soulbound_contract = SoulboundBadges[-1]
-    # TODO
+    # Act / Assert
+    with pytest.raises(exceptions.VirtualMachineError):
+        soulbound_contract.transferFrom(dev_wallet2, dev_wallet, {"from": dev_wallet2})

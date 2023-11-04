@@ -3,7 +3,6 @@ from helpers import check_network_is_mainnet_fork, NULL_ADDRESS
 from brownie import (
     Users,
     config,
-    network,
     accounts,
     exceptions,
 )

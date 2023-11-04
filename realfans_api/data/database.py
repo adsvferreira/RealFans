@@ -3,6 +3,9 @@ from typing import Optional, Union
 from notify.notifier import Notifier
 from badge_minter.minter import BadgeMinter
 from realfans_api.data.models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption, LeaderboardType
+from pyparsing import Any
+from typing import Callable
+from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
 
 
 class MyDatabase:
@@ -77,6 +80,11 @@ class MyDatabase:
         if not address:
             return []
         return cls.get_user_quests_done(address)
+
+    @classmethod
+    def add_multiple_entries(cls, function: Callable, entries: list[Any]):
+        for entry in entries:
+            function(entry)
 
     @classmethod
     def add_twitter_profile(cls, profile: TwitterProfile):
