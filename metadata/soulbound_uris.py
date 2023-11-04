@@ -11,5 +11,5 @@ SOULBOUND_URIS = {
     "soulbound_fan_1": "ipfs://bafybeifizmsqkbb3jt6llqlrd3owjeqxzbn5kkhbyeicy46m2gfdrdtfay/TheSpendingSpree.json",
     "soulbound_eth_2": "ipfs://bafybeifizmsqkbb3jt6llqlrd3owjeqxzbn5kkhbyeicy46m2gfdrdtfay/TheFinancialOdyssey.json",
     "soulbound_eth_3": "ipfs://bafybeifizmsqkbb3jt6llqlrd3owjeqxzbn5kkhbyeicy46m2gfdrdtfay/TheGrandioseWealthVenture.json",
-    "soulbound_all_nfts": "ipfs://bafybeifizmsqkbb3jt6llqlrd3owjeqxzbn5kkhbyeicy46m2gfdrdtfay/TheCollector%27sTriumph%EF%80%BAMasterofAllTreasures.json"
+    "soulbound_all_nfts": "ipfs://bafybeifizmsqkbb3jt6llqlrd3owjeqxzbn5kkhbyeicy46m2gfdrdtfay/TheCollector%27sTriumph%EF%80%BAMasterofAllTreasures.json",
 }
