@@ -63,7 +63,7 @@ vault.withdraw(NFT_ETH_VALUE, dev_wallet, dev_wallet, {"from": dev_wallet})
 
 ################## NFT TESTS ##################
 
-nftGifts = NFTGifts.deploy(vault.address, {"from": dev_wallet})
+nftGifts = NFTGifts.deploy(vault.address, users.address, {"from": dev_wallet})
 tx8 = nftGifts.addNewGiftURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
 tx9 = weth.approve(nftGifts.address, APPROVE_VALUE, {"from": dev_wallet})
 CREATOR_ADDR = dev_wallet.address
@@ -89,7 +89,7 @@ nftGifts.getAllDonators()
 nftGifts.getAllReceivers()
 
 # mint to unregistred account
-tx12 = nftGifts.mintGift("elonmusk", URI_EXAMPLE, {"from": dev_wallet})
+tx12 = nftGifts.mintGift("elonmusk", URI_EXAMPLE, {"from": dev_wallet2})
 nftGifts.getGiftQtyOfUnclaimedAccount("elonmusk", URI_EXAMPLE)
 nftGifts.getAllDonators()
 nftGifts.getAllReceivers()
