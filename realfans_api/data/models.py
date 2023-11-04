@@ -1,12 +1,12 @@
+from enum import Enum
 from typing import Optional
-from enum import Enum, auto
 from pydantic.dataclasses import dataclass
 
 
 class LeaderboardType(str, Enum):
-    DONATERS = auto()
-    QUESTS = auto()
-    CREATORS = auto()
+    QUESTS = "QUESTS"
+    DONATERS = "DONATERS"
+    CREATORS = "CREATORS"
 
 
 @dataclass
