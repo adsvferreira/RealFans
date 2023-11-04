@@ -1,30 +1,39 @@
+from typing import Self
 from .models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption
 
 
 class MyDatabase:
-    twitter_profiles: dict[str, TwitterProfile]
+    twitter_profiles: dict[str, TwitterProfile]  # username, TwitterProfile
     address_to_twitter: dict[str, str] = {}  # address, twitter handle
     twitter_to_address: dict[str, str] = {}  # reverse from above
-    donations_sent: dict[str, Donation] = {}  # address, Donation
-    donations_received: dict[str, Donation] = {}  # twitter handler, Donation
-    quests_profile: dict[str, BadgeMinted] = {}  # address, BadgeMinted
+    donations_sent: dict[str, list[Donation]] = {}  # address, Donation
+    donations_received: dict[str, list[Donation]] = {}  # twitter handler, Donation
+    quests_profile: dict[str, list[BadgeMinted]] = {}  # address, BadgeMinted
 
-    @staticmethod
-    def add_twitter_profile(profile: TwitterProfile):
-        ...
+    @classmethod
+    def add_twitter_profile(cls, profile: TwitterProfile):
+        cls.twitter_profiles[profile.username] = profile
 
-    @staticmethod
-    def add_user_added(profile: UserAdded):
-        ...
+    @classmethod
+    def add_user_added(cls, user_added: UserAdded):
+        cls.address_to_twitter[user_added.address] = user_added.twitter_handle
+        cls.twitter_to_address[user_added.twitter_handle] = user_added.address
 
-    @staticmethod
-    def add_badge_minted(profile: BadgeMinted):
-        ...
+    @classmethod
+    def add_badge_minted(cls, badge_minted: BadgeMinted):
+        cls.quests_profile.setdefault(badge_minted.to_address, []).append(badge_minted)
 
-    @staticmethod
-    def add_donation(profile: Donation):
-        ...
+    @classmethod
+    def add_donation(cls, donation: Donation):
+        cls.donations_sent.setdefault(donation.sender, []).append(donation)
+        cls.donations_received.setdefault(donation.receiver_twitter_handle, []).append(donation)
 
-    @staticmethod
-    def add_redemption(profile: Redemption):
-        ...
+    @classmethod
+    def add_redemption(cls, redemption: Redemption):
+        for donation in cls.donations_received[redemption.receiver_twitter_handle]:
+            if donation.redeemed:
+                continue
+            if donation.gift_uri != redemption.gift_token_uri:
+                continue
+            donation.redeemed = True
+            break
