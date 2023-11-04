@@ -1,5 +1,6 @@
 from typing import Optional, Union
 
+from notify.notifier import Notifier
 from badge_minter.minter import BadgeMinter
 from realfans_api.data.models import TwitterProfile, BadgeMinted, UserAdded, Donation, Redemption, LeaderboardType
 
@@ -95,6 +96,10 @@ class MyDatabase:
     def add_donation(cls, donation: Donation):
         cls.donations_sent.setdefault(donation.sender, []).append(donation)
         cls.donations_received.setdefault(donation.receiver_twitter_handle, []).append(donation)
+
+        if address := cls.get_twitter_address(donation.receiver_twitter_handle):
+            Notifier.queue_notification(address, donation.eth_value)
+
         cls.compute_leaderboard()
         BadgeMinter.queue_mint_badge(donation.sender, cls.donations_sent[donation.sender])
 
