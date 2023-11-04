@@ -9,8 +9,8 @@ from realfans_api.data.models import Donation, BadgeMinted
 
 class BadgeMinter:
     @classmethod
-    def queue_mint_badge(cls, address: str, donations: list[Donation], badges: list[BadgeMinted]):
-        thread = Thread(target=cls.mint_badge, args=(address, donations, badges))
+    def queue_mint_badge(cls, address: str, donations: list[Donation]):
+        thread = Thread(target=cls.mint_badge, args=(address, donations), daemon=True)
         thread.start()
 
     @classmethod
@@ -19,7 +19,9 @@ class BadgeMinter:
             return
         sleep(10)
 
-        already_aquired_badges = {badge.badge_uri for badge in badges}
+        from realfans_api.data.database import MyDatabase
+
+        already_aquired_badges = {badge.badge_uri for badge in MyDatabase.quests_profile.get(address, [])}
 
         stats: dict[str, Any] = {}
         stats["donation_count"] = len(donations)
