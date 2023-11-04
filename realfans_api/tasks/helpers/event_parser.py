@@ -2,7 +2,7 @@ from realfans_api.data.models import *
 
 def parse_user_added_event(event):
     event_args = event.args
-    return UserAdded(event_args.userHandle, event_args.userHandle)
+    return UserAdded(event_args.userAddress, event_args.userHandle)
 
 def parse_donation_event(event):
     event_args = event.args

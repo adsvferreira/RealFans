@@ -34,17 +34,26 @@ def execute():
             soulbound_mint_events = [event_parser.parse_badge_minted_event(event) for event in soulbound.events.BadgeMinted.createFilter(fromBlock=from_block, toBlock=to_block).get_all_entries()]
             my_database.add_multiple_entries(my_database.add_badge_minted, soulbound_mint_events)
 
-            print("DONATIONS_RECEIVED\n")
-            print(my_database.donations_received)
-            print()
+            if nft_redemption_events:
+                print("DONATIONS_RECEIVED")
+                print(nft_redemption_events)
+                print()
 
-            print("DONATIONS_SENT\n")
-            print(my_database.donations_sent)
-            print()
+            if nft_donation_events:
+                print("DONATIONS_SENT")
+                print(nft_donation_events)
+                print()
 
-            print("TWITTER_TO_ADDRESS\n")
-            print(my_database.twitter_to_address)
-            print()
+            if user_added_events:
+                print("TWITTER_TO_ADDRESS")
+                print(user_added_events)
+                print()
+
+            if soulbound_mint_events:
+                print("SOULBOUND MINTED")
+                print(soulbound_mint_events)
+                print()
+            
 
         time.sleep(10)
         from_block = to_block
