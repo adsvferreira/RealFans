@@ -1,19 +1,51 @@
 import os
+import time
 from brownie import chain, network
-from realfans_api.data import database
+from realfans_api.tasks.helpers import event_parser
+from realfans_api.data.database import MyDatabase as my_database
 from realfans_api.scripts.build_contracts import build_contracts
 
 
 
 
-def execute(database: database.MyDatabase):
-    to_block = None
-    from_block = 147050000  # Contracts deployed after this block 147050037
+def execute():
+    print("STARTED")
+    to_block = 0
+    from_block = 147050000
     network_id = os.getenv("NETWORK_ID", "")  # DEFAULT VALUE SHOULD NEVER BE USED
     contracts = build_contracts(network_id)
     while True:  # POG
         to_block = chain.height
-        # Fetch user events
-        users = contracts["users"]
-        user_added_events = users.events.UserAdded.createFilter(fromBlock=from_block, to_block=to_block).get_all_entries()
+        if to_block > from_block:
+            # Fetch and write user events
+            users = contracts["users"]
+            user_added_events = [event_parser.parse_user_added_event(event) for event in users.events.userAdded.createFilter(fromBlock=from_block, toBlock=to_block).get_all_entries()]
+            my_database.add_multiple_entries(my_database.add_user_added, user_added_events)
+        
+            # Fetch and write NFT events
+            nft = contracts["nft"]
+            nft_donation_events = [event_parser.parse_donation_event(event) for event in nft.events.Donation.createFilter(fromBlock=from_block, toBlock=to_block).get_all_entries()]
+            my_database.add_multiple_entries(my_database.add_donation, nft_donation_events)
+            nft_redemption_events = [event_parser.parse_redemption_event(event) for event in nft.events.Redemption.createFilter(fromBlock=from_block, toBlock=to_block).get_all_entries()]
+            my_database.add_multiple_entries(my_database.add_redemption, nft_redemption_events)
+
+            # Fetch and write Soulbound events
+            soulbound = contracts["soulbound"]
+            soulbound_mint_events = [event_parser.parse_badge_minted_event(event) for event in soulbound.events.BadgeMinted.createFilter(fromBlock=from_block, toBlock=to_block).get_all_entries()]
+            my_database.add_multiple_entries(my_database.add_badge_minted, soulbound_mint_events)
+
+            print("DONATIONS_RECEIVED\n")
+            print(my_database.donations_received)
+            print()
+
+            print("DONATIONS_SENT\n")
+            print(my_database.donations_sent)
+            print()
+
+            print("TWITTER_TO_ADDRESS\n")
+            print(my_database.twitter_to_address)
+            print()
+
+        time.sleep(10)
+        from_block = to_block
         
