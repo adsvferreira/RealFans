@@ -2,9 +2,16 @@
 pragma solidity 0.8.21;
 
 interface INFTGifts {
-    function mintGift(address to, string calldata badgeURI) external payable;
+    function mintGift(
+        string memory receiverTwitterHandle,
+        string calldata badgeURI
+    ) external payable;
 
     function addNewGiftURI(string memory badgeURI, uint256 ethValue) external;
+
+    function redeemDonationsToUnclaimedAccount(string memory giftURI) external;
+
+    function isRedeemed(uint256 tokenId) external view returns (bool);
 
     function getAllURIs() external view returns (string[] memory);
 
@@ -18,4 +25,17 @@ interface INFTGifts {
         external
         view
         returns (uint256 totalEthBalance);
+
+    function getAllDonators() external view returns (address[] memory);
+
+    function getAllUnclaimedAccountReceivers()
+        external
+        view
+        returns (string[] memory);
+
+    function getAllReceivers() external view returns (address[] memory);
+
+    function getEthBalanceOfUnclaimedAccount(
+        string memory twitterHandle
+    ) external view returns (uint256 ethBalanceOf);
 }

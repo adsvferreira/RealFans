@@ -8,6 +8,8 @@ contract Users is Ownable, IUsers {
     mapping(string twitterHandle_ => address address_) private _getAddress;
     mapping(address address_ => string twitterHandle_) private _getTwitter;
 
+    event userAdded(address indexed userAddress, string indexed userHandle);
+
     constructor() Ownable(msg.sender) {}
 
     function getAddressFromTwitterHandle(
@@ -27,16 +29,17 @@ contract Users is Ownable, IUsers {
         string calldata twitterHandle_
     ) external onlyOwner returns (bool) {
         require(
-            keccak256(abi.encodePacked(_getTwitter[address_])) !=
+            keccak256(abi.encodePacked(_getTwitter[address_])) ==
                 keccak256(abi.encodePacked("")),
             "Already associated address"
         );
         require(
-            _getAddress[twitterHandle_] != address(0),
+            _getAddress[twitterHandle_] == address(0),
             "Already associated Twitter Handle"
         );
         _getAddress[twitterHandle_] = address_;
         _getTwitter[address_] = twitterHandle_;
+        emit userAdded(address_, twitterHandle_);
         return true;
     }
 }

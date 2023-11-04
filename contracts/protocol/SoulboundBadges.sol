@@ -21,6 +21,8 @@ contract SoulboundBadges is
     mapping(string => uint256) private _totalBadgeQty;
     mapping(address => mapping(string => uint256)) private _badgeQtyPerAddress;
 
+    event BadgeMinted(address indexed receiver, string badgeURI);
+
     constructor() ERC721("SoulboundBadges", "SBB") Ownable(msg.sender) {}
 
     function mintBadge(
@@ -37,6 +39,7 @@ contract SoulboundBadges is
         _tokenIdCounter = tokenIdCounter;
         ++_totalBadgeQty[badgeURI];
         ++_badgeQtyPerAddress[to][badgeURI];
+        emit BadgeMinted(to, badgeURI);
     }
 
     function addNewBadgeURI(string memory badgeURI) external onlyOwner {
