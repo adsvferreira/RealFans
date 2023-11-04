@@ -15,10 +15,12 @@ vault_name = "Real Fans Community Pool"
 vault_symbol = "RFCP"
 weth = Contract.from_abi("ERC20", config["networks"][network.show_active()]["deposit_asset"], erc20_abi)
 
-tx1 = SoulboundBadges.deploy({"from": dev_wallet})
-soulboundBadges = SoulboundBadges[-1]
-tx2 = soulboundBadges.addNewBadgeURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
-tx3 = soulboundBadges.mintBadge(dev_wallet, URI_EXAMPLE, {"from": dev_wallet})
+################## SOULBOUND TESTS ##################
+
+# tx1 = SoulboundBadges.deploy({"from": dev_wallet})
+# soulboundBadges = SoulboundBadges[-1]
+# tx2 = soulboundBadges.addNewBadgeURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
+# tx3 = soulboundBadges.mintBadge(dev_wallet, URI_EXAMPLE, {"from": dev_wallet})
 
 soulboundBadges.getAllURIs()
 soulboundBadges.getTokenIdCounter()
@@ -51,13 +53,18 @@ users.writeTwitterHandle(dev_address_2, twitter_handle_2, {"from": dev_wallet_2}
 
 ################################################################
 
+################## COMMUNITY VAULT TESTS ##################
+
 vault = CommunityVault.deploy(asset, vault_name, vault_symbol, {"from": dev_wallet})
 # tx5 = weth.approve(vault.address, APPROVE_VALUE, {"from": dev_wallet})
 # tx6 = vault.deposit(100_000, dev_wallet, {"from": dev_wallet})
 # vault.balanceOf(dev_wallet)
 # vault.withdraw(NFT_ETH_VALUE, dev_wallet, dev_wallet, {"from":dev_wallet})
 
-nftGifts = NFTGifts.deploy(vault.address, users.address, {"from": dev_wallet})
+
+################## NFT TESTS ##################
+
+nftGifts = NFTGifts.deploy(vault.address, {"from": dev_wallet})
 tx8 = nftGifts.addNewGiftURI(URI_EXAMPLE, NFT_ETH_VALUE, {"from": dev_wallet})
 tx9 = weth.approve(nftGifts.address, APPROVE_VALUE, {"from": dev_wallet})
 CREATOR_ADDR = dev_wallet.address
