@@ -59,7 +59,7 @@ contract NFTGifts is ERC721, ERC721URIStorage, Ownable, INFTGifts {
     function mintGift(
         string memory receiverTwitterHandle,
         string calldata giftURI
-    ) external payable onlyOwner {
+    ) external onlyOwner {
         require(_isGiftURIWhitelisted(giftURI), "tokenURI noy whitelisted yet");
         address to = usersDB.getAddressFromTwitterHandle(receiverTwitterHandle);
         uint256 ethValue = _ethValuePerGiftURI[giftURI];

@@ -5,7 +5,7 @@ interface INFTGifts {
     function mintGift(
         string memory receiverTwitterHandle,
         string calldata badgeURI
-    ) external payable;
+    ) external;
 
     function addNewGiftURI(string memory badgeURI, uint256 ethValue) external;
 
