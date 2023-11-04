@@ -17,14 +17,22 @@ networks:
     verify: False
   arbitrum-main-fork:
     verify: False
+<<<<<<< HEAD
     users_address: "0x4D76E5Cc49091563BB3203657E11c485daAB4681"
     nft_gifts_address: "0xCF85C0DB8b670c3AADa28B47b735B085BFCF2c9d"
     soulbound_address: "0x8b0242F40b0428715475254d37853Ea13b83b610"
     community_vault_address: "0x48f27B0094d907417F781294bCd9fc48C4F556fB"
+=======
+    deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
+>>>>>>> master
   arbitrum-main:
     verify: True
     users_address: "0xf07CDD1D9cc628F4a28d8a63D52a5aF41311ca7B"
     nft_gifts_address: "0xb74D09f6f2444Fd06F6A3c7B4629704BBA4d211E"
     soulbound_address: "0xB4C0CFb2A7762B6a867E0f630Bf73f359AED4D58"
+<<<<<<< HEAD
+=======
+    community_vault_address: "0xA62A970999cd1Ae8071F3BEC6841BA1fe7413cab"
+>>>>>>> master
     deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
     community_vault_address: "0xA62A970999cd1Ae8071F3BEC6841BA1fe7413cab"

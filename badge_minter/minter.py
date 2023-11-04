@@ -1,4 +1,6 @@
+from time import sleep
 from typing import Any
+from threading import Thread
 
 from metadata.soulbound_metadata import all_badges
 from metadata.soulbound_uris import SOULBOUND_URIS
@@ -7,7 +9,16 @@ from realfans_api.data.models import Donation, BadgeMinted
 
 class BadgeMinter:
     @classmethod
+    def queue_mint_badge(cls, address: str, donations: list[Donation], badges: list[BadgeMinted]):
+        thread = Thread(target=cls.mint_badge, args=(address, donations, badges))
+        thread.start()
+
+    @classmethod
     def mint_badge(cls, address: str, donations: list[Donation], badges: list[BadgeMinted]):
+        if address == "0x":
+            return
+        sleep(10)
+
         already_aquired_badges = {badge.badge_uri for badge in badges}
 
         stats: dict[str, Any] = {}
@@ -45,6 +56,7 @@ class BadgeMinter:
 
     @classmethod
     def _mint_badge(cls, address: str, badge: dict):
+        print(f"Minting badge to {address}")
         try:
             from brownie import config, accounts
             from brownie import SoulboundBadges
