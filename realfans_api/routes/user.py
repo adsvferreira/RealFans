@@ -4,10 +4,13 @@ from realfans_api.data.models import TwitterProfile
 from realfans_api.socialblade.api import SocialBladeAPI
 
 router = APIRouter()
-
 API = SocialBladeAPI()
-
 cache: dict[str, TwitterProfile] = {}
+
+
+@router.get("/")
+async def test() -> dict:
+    return {"gg": 1}
 
 
 @router.get("/getUserInfo")
