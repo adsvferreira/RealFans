@@ -2,7 +2,7 @@ from time import sleep
 from typing import Any
 from threading import Thread
 
-from realfans_api.enums import BROWNIE_PROJECT
+from realfans_api.load_brownie import BROWNIE_PROJECT
 from metadata.soulbound_metadata import all_badges
 from metadata.soulbound_uris import SOULBOUND_URIS
 from realfans_api.data.models import Donation
