@@ -3,6 +3,7 @@ from fastapi import APIRouter
 
 from twitter.validator import UserValidator
 from realfans_api.schemas.users import UserProfile
+from realfans_api.load_brownie import get_network_info_from_file
 from realfans_api.load_brownie import BROWNIE_PROJECT, OWNER_WALLET
 from realfans_api.routes.helpers import get_user_info__by_address, get_user_info__by_username
 
@@ -26,7 +27,7 @@ async def submit_twitter_handle(address: str, twitter_handle: str, twitter_token
             return {"success": False, "message": "Failed tx"}
         print(f"Twitter to wallet assoaction => {address}:{twitter_handle}")
 
-        users_contract = BROWNIE_PROJECT.Users.at("0xf07CDD1D9cc628F4a28d8a63D52a5aF41311ca7B")
+        users_contract = BROWNIE_PROJECT.Users.at(get_network_info_from_file()["users_address"])
         try:
             users_contract.writeTwitterHandle(address, twitter_handle, {"from": OWNER_WALLET})
         except RuntimeError:

@@ -62,7 +62,7 @@ class BadgeMinter:
     def _mint_badge(cls, address: str, badge: dict):
         try:
             print(f"Minting badge to {address}")
-            soulbound_contract = BROWNIE_PROJECT.SoulboundBadges.at("0xB4C0CFb2A7762B6a867E0f630Bf73f359AED4D58")
+            soulbound_contract = BROWNIE_PROJECT.SoulboundBadges.at(get_network_info_from_file()["soulbound_address"])
 
             badge_id = SOULBOUND_URIS[badge["id"]]
             try:
