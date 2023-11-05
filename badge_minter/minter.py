@@ -2,10 +2,10 @@ from time import sleep
 from typing import Any
 from threading import Thread
 
-from realfans_api.load_brownie import BROWNIE_PROJECT
+from realfans_api.data.models import Donation
 from metadata.soulbound_metadata import all_badges
 from metadata.soulbound_uris import SOULBOUND_URIS
-from realfans_api.data.models import Donation
+from realfans_api.load_brownie import BROWNIE_PROJECT, OWNER_WALLET
 
 
 class BadgeMinter:
@@ -60,14 +60,12 @@ class BadgeMinter:
 
     @classmethod
     def _mint_badge(cls, address: str, badge: dict):
-        print(f"Minting badge to {address}")
         try:
-            from brownie import accounts, config
-            contract_owner_wallet = accounts.add(config["wallets"]["from_key_1"])
+            print(f"Minting badge to {address}")
             soulbound_contract = BROWNIE_PROJECT.SoulboundBadges.at("0xB4C0CFb2A7762B6a867E0f630Bf73f359AED4D58")
 
             badge_id = SOULBOUND_URIS[badge["id"]]
-            soulbound_contract.mintBadge(address, badge_id, {"from": contract_owner_wallet})
+            soulbound_contract.mintBadge(address, badge_id, {"from": OWNER_WALLET})
         except Exception as exc:
             import traceback
 
