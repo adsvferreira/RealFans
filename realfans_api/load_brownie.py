@@ -1,6 +1,9 @@
 import os
+from dotenv import load_dotenv, find_dotenv
 from brownie import project, network, accounts, config
 
+
+load_dotenv(find_dotenv())
 
 if not os.getenv("NETWORK_ID", ""):
     raise Exception("NETWORK_ID ENV VARIABLE NOT DEFINED")
