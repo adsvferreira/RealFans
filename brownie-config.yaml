@@ -26,9 +26,12 @@ networks:
     community_vault_address: "0xA62A970999cd1Ae8071F3BEC6841BA1fe7413cab"
     deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
     community_vault_address: "0xA62A970999cd1Ae8071F3BEC6841BA1fe7413cab"
-  neon-evm:
-    verify: False
-    deposit_asset: "0x202c35e517fa803b537565c40f0a6965d7204609"
-  core-dao:
-    verify: False
+  polygon-zk-main:
+    verify: True
+    deposit_asset: "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9"
+  gnosis-main:
+    verify: False # Not compatible
+    deposit_asset: "0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1"
+  coredao-main:
+    verify: False # Not compatible
     deposit_asset: "0x40375C92d9FAf44d2f9db9Bd9ba41a3317a2404f"
