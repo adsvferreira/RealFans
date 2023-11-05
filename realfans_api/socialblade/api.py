@@ -3,7 +3,7 @@ import aiohttp
 from typing import Optional
 
 from realfans_api.data.models import TwitterProfile
-from realfans_api.utils.requests.api_interface import APIInterfaceAsync, ExternalAPIException
+from realfans_api.utils.requests.api_interface import APIInterfaceAsync, ExternalAPIException, ForbiddenException
 
 
 class Parsers:
@@ -20,7 +20,12 @@ class SocialBladeAPI(APIInterfaceAsync):
     ROOT_URL = "https://socialblade.com/"
 
     async def get_user_data(self, username: str) -> TwitterProfile:
-        url, status, html = await self.request(f"twitter/user/{username}", "GET")
+        while 1:
+            try:
+                url, status, html = await self.request(f"twitter/user/{username}", "GET")
+            except ForbiddenException:
+                print(f"Forbidden request on {username}")
+                continue
 
         requested_url = f"{self.ROOT_URL}twitter/user/{username}"
         if self.__was_invalid_request(url, requested_url, status):
