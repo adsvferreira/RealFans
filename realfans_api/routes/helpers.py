@@ -20,7 +20,7 @@ def get_user_stats(username: Optional[str], address: Optional[str]) -> UserProfi
     for quest in quests_done:
         badge_info = requests.get(quest.badge_uri).json()
         new_badge = BadgeMintedWithImage(
-            to_address=quest.to_address, badge_uri=quest.badge_uri, image=badge_info["info"]
+            to_address=quest.to_address, badge_uri=quest.badge_uri, image=badge_info["image"]
         )
         quest_done_with_image.append(new_badge)
 
