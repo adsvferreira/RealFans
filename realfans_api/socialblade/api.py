@@ -22,8 +22,9 @@ class SocialBladeAPI(APIInterfaceAsync):
     async def get_user_data(self, username: str) -> TwitterProfile:
         while 1:
             try:
-                print(f"[socialblade] Fetching {username}")
                 username = username.replace("@", "")
+                username = username.replace("%40", "")
+                print(f"[socialblade] Fetching {username}")
                 url, status, html = await self.request(f"twitter/user/{username}", "GET")
                 break
             except ForbiddenException:
