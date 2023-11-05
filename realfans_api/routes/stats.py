@@ -30,7 +30,8 @@ async def get_leaderboards(leaderboard_type: LeaderboardType) -> LeaderBoardRank
         elif leaderboard_type == LeaderboardType.QUESTS:
             value_rank = len(profile.stats.quests_done)
 
-        leaderboard.ranks.append(LeaderBoardRank(rank, value_rank, profile))
+        if value_rank:
+            leaderboard.ranks.append(LeaderBoardRank(rank, value_rank, profile))
 
     return leaderboard
 
