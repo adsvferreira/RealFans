@@ -26,3 +26,6 @@ networks:
     community_vault_address: "0xA62A970999cd1Ae8071F3BEC6841BA1fe7413cab"
     deposit_asset: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1" # WETH
     community_vault_address: "0xA62A970999cd1Ae8071F3BEC6841BA1fe7413cab"
+  neon-evm:
+    verify: False
+    deposit_asset: "0x202c35e517fa803b537565c40f0a6965d7204609"
