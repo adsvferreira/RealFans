@@ -1,9 +1,10 @@
+import requests
 from typing import Optional
 from dataclasses import asdict
 
 from realfans_api.socialblade.api import SocialBladeAPI
 from realfans_api.data.database import MyDatabase, TwitterProfile
-from realfans_api.schemas.users import UserProfile, UserProfileStats
+from realfans_api.schemas.users import UserProfile, UserProfileStats, BadgeMintedWithImage
 
 API = SocialBladeAPI()
 
@@ -15,11 +16,21 @@ def get_user_stats(username: Optional[str], address: Optional[str]) -> UserProfi
     elif username and not quests_done:
         quests_done = MyDatabase.get_user_quests_done_by_twitter(username)
 
+    quest_done_with_image: list[BadgeMintedWithImage] = []
+    for quest in quests_done:
+        badge_info = requests.get(quest.badge_uri).json()
+        new_badge = BadgeMintedWithImage(
+            to_address=quest.to_address, badge_uri=quest.badge_uri, image=badge_info["info"]
+        )
+        quest_done_with_image.append(new_badge)
+
     eth_sent = MyDatabase.get_total_eth_gifted_by_address(address)
     eth_received = MyDatabase.get_total_eth_received_by_creator(username)
     ranks = MyDatabase.get_user_ranks(username, address)
 
-    return UserProfileStats(eth_sent=eth_sent, eth_received=eth_received, ranks=ranks, quests_done=quests_done)
+    return UserProfileStats(
+        eth_sent=eth_sent, eth_received=eth_received, ranks=ranks, quests_done=quest_done_with_image
+    )
 
 
 async def get_user_info__by_username(username: str) -> UserProfile:

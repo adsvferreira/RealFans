@@ -6,11 +6,16 @@ from realfans_api.data.models import LeaderboardType, TwitterProfile, Donation, 
 
 
 @dataclass
+class BadgeMintedWithImage(BadgeMinted):
+    image: str
+
+
+@dataclass
 class UserProfileStats:
     eth_sent: float = 0
     eth_received: float = 0
     ranks: dict[LeaderboardType, Union[int, None]] = field(default_factory=dict)
-    quests_done: list[BadgeMinted] = field(default_factory=list)
+    quests_done: list[BadgeMintedWithImage] = field(default_factory=list)
 
 
 @dataclass
