@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import APIRouter
 
 from realfans_api.data.database import MyDatabase
@@ -12,6 +13,11 @@ router = APIRouter()
 async def get_leaderboards(leaderboard_type: LeaderboardType) -> LeaderBoardRanks:
     leaderboard = LeaderBoardRanks(leaderboard_type, [])
     ranks = MyDatabase.leaderboards[leaderboard_type]
+    if leaderboard_type == LeaderboardType.CREATORS:
+        usernames = {username for username in ranks}
+        usernames = ["elonmusk", "dynalzlk"]
+        await asyncio.gather(*[get_user_info__by_username(username) for username in usernames])
+
     for key, rank in ranks.items():
         if leaderboard_type == LeaderboardType.CREATORS:
             profile = await get_user_info__by_username(key)
