@@ -15,7 +15,6 @@ async def get_leaderboards(leaderboard_type: LeaderboardType) -> LeaderBoardRank
     ranks = MyDatabase.leaderboards[leaderboard_type]
     if leaderboard_type == LeaderboardType.CREATORS:
         usernames = {username for username in ranks}
-        usernames = ["elonmusk", "dynalzlk"]
         await asyncio.gather(*[get_user_info__by_username(username) for username in usernames])
 
     for key, rank in ranks.items():
