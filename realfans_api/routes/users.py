@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import APIRouter
 
 from twitter.validator import UserValidator
@@ -26,9 +27,12 @@ async def submit_twitter_handle(address: str, twitter_handle: str, twitter_token
         print(f"Twitter to wallet assoaction => {address}:{twitter_handle}")
 
         users_contract = BROWNIE_PROJECT.Users.at("0xf07CDD1D9cc628F4a28d8a63D52a5aF41311ca7B")
-        users_contract.writeTwitterHandle(address, twitter_handle, {"from": OWNER_WALLET})
+        try:
+            users_contract.writeTwitterHandle(address, twitter_handle, {"from": OWNER_WALLET})
+        except RuntimeError:
+            await asyncio.sleep(1)
+            users_contract.writeTwitterHandle(address, twitter_handle, {"from": OWNER_WALLET})
         return {"success": True, "message": "Ok"}
-
     except Exception as exc:
         import traceback
 

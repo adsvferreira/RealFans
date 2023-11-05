@@ -65,7 +65,11 @@ class BadgeMinter:
             soulbound_contract = BROWNIE_PROJECT.SoulboundBadges.at("0xB4C0CFb2A7762B6a867E0f630Bf73f359AED4D58")
 
             badge_id = SOULBOUND_URIS[badge["id"]]
-            soulbound_contract.mintBadge(address, badge_id, {"from": OWNER_WALLET})
+            try:
+                soulbound_contract.mintBadge(address, badge_id, {"from": OWNER_WALLET})
+            except RuntimeError:
+                sleep(1)
+                soulbound_contract.mintBadge(address, badge_id, {"from": OWNER_WALLET})
         except Exception as exc:
             import traceback
 

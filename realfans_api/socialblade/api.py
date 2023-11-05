@@ -23,6 +23,7 @@ class SocialBladeAPI(APIInterfaceAsync):
         while 1:
             try:
                 url, status, html = await self.request(f"twitter/user/{username}", "GET")
+                break
             except ForbiddenException:
                 print(f"Forbidden request on {username}")
                 continue
