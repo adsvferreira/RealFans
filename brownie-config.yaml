@@ -29,3 +29,6 @@ networks:
   neon-evm:
     verify: False
     deposit_asset: "0x202c35e517fa803b537565c40f0a6965d7204609"
+  core-dao:
+    verify: False
+    deposit_asset: "0x40375C92d9FAf44d2f9db9Bd9ba41a3317a2404f"
