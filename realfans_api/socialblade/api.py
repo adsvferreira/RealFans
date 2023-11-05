@@ -23,8 +23,8 @@ class SocialBladeAPI(APIInterfaceAsync):
         while 1:
             try:
                 fetching_username = username.replace("@", "")
-                fetching_username = username.replace("%40", "")
-                print(f"[socialblade] Fetching {username}")
+                fetching_username = fetching_username.replace("%40", "")
+                print(f"[socialblade] Fetching {fetching_username} from {username}")
                 url, status, html = await self.request(f"twitter/user/{fetching_username}", "GET")
                 break
             except ForbiddenException:
@@ -32,12 +32,16 @@ class SocialBladeAPI(APIInterfaceAsync):
                 continue
 
         requested_url = f"{self.ROOT_URL}twitter/user/{username}"
-        if self.__was_invalid_request(url, requested_url, status):
-            raise ExternalAPIException(
-                f"Failed request, status: {status}, requested url: {requested_url}\n\nHtml: {html}"
-            )
-        if self.__check_if_invalid(html):
-            raise ExternalAPIException(f"Invalid data.\n\nHtml: {html}")
+        try:
+            if self.__was_invalid_request(url, requested_url, status):
+                raise ExternalAPIException(
+                    f"Failed request, status: {status}, requested url: {requested_url}\n\nHtml: {html}"
+                )
+            if self.__check_if_invalid(html):
+                raise ExternalAPIException(f"Invalid data.\n\nHtml: {html}")
+        except Exception:
+            print(f"returning empty profile for {username}")
+            return TwitterProfile(username=username)
 
         return TwitterProfile(
             username=username.lower(),
