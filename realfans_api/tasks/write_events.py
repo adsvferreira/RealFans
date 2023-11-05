@@ -7,7 +7,6 @@ from realfans_api.scripts.build_contracts import build_contracts
 
 
 def execute():
-    print("STARTED")
     to_block = 0
     from_block = 147050000
     network_id = os.getenv("NETWORK_ID", "")  # DEFAULT VALUE SHOULD NEVER BE USED

@@ -20,9 +20,9 @@ async def get_leaderboards(leaderboard_type: LeaderboardType) -> LeaderBoardRank
 
         if leaderboard_type == LeaderboardType.CREATORS:
             value_rank = profile.stats.eth_received
-        if leaderboard_type == LeaderboardType.DONATERS:
+        elif leaderboard_type == LeaderboardType.DONATERS:
             value_rank = profile.stats.eth_sent
-        if leaderboard_type == LeaderboardType.QUESTS:
+        elif leaderboard_type == LeaderboardType.QUESTS:
             value_rank = len(profile.stats.quests_done)
 
         leaderboard.ranks.append(LeaderBoardRank(rank, value_rank, profile))
