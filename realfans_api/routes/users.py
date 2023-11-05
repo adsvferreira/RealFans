@@ -17,5 +17,8 @@ async def get_user_info_by_address(address: str) -> UserProfile:
 
 
 @router.post("/submit_twitter_handle")
-async def submit_twitter_handle(address: str, twitter_token: str):
-    ...
+async def submit_twitter_handle(address: str, twitter_handle: str, twitter_token: str) -> int:
+    print(address)
+    print(twitter_handle)
+    print(twitter_token)
+    return 1

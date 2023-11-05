@@ -27,8 +27,7 @@ async def get_user_info__by_username(username: str) -> UserProfile:
     profile = MyDatabase.get_twitter_profile(username)
     if not profile:
         profile = await API.get_user_data(username)
-        if profile.name:
-            MyDatabase.add_twitter_profile(profile)
+        MyDatabase.add_twitter_profile(profile)
 
     gifts_received = MyDatabase.get_user_received_donations(username)
     gifts_sent = MyDatabase.get_user_sent_gifts_by_twitter(username)
